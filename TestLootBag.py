@@ -3,28 +3,28 @@ from lootbag import *
 
 class TestLootBag(unittest.TestCase):
 
-    # def test_can_add_toy_for_child(self):
+    def test_can_add_toy_for_child(self):
 
-    #   bag = LootBag()
-    #   child = "Timothy"
-    #   toy = "Tonka Truck"
+      bag = LootBag()
+      child = "Timothy"
+      toy = "Tonka Truck"
 
-    #   bag.add_toy_for_child(child, toy)
-    #   print("Toys: ", bag.get_by_child(child))
+      bag.add_toy_for_child(child, toy)
+      print("Toys: ", bag.get_by_child(child))
 
-    #   self.assertIn(toy, bag.get_by_child(child))
+      self.assertIn(toy, bag.get_by_child(child))
 
-    # def test_can_remove_toy_for_child(self):
+    def test_can_remove_toy_for_child(self):
 
-    #   bag = LootBag()
-    #   child = "Timothy"
-    #   toy = "Tonka Truck"
+      bag = LootBag()
+      child = "Timothy"
+      toy = "Tonka Truck"
 
-    #   bag.add_toy_for_child(child, toy)
-    #   self.assertIn(toy, bag.get_by_child(child))
+      bag.add_toy_for_child(child, toy)
+      self.assertIn(toy, bag.get_by_child(child))
 
-    #   bag.remove_toy_for_child(child, toy)
-    #   self.assertNotIn(toy, bag.get_by_child(child))
+      bag.remove_toy_for_child(child, toy)
+      self.assertNotIn(toy, bag.get_by_child(child))
 
     def test_can_list_all_children_getting_a_toy(self):
 
@@ -40,25 +40,27 @@ class TestLootBag(unittest.TestCase):
       self.assertIn("Drew", list_of_kids)
       self.assertIn("Trent", list_of_kids)
 
-    # def test_list_child_toys(self):
+    def test_list_child_toys(self):
 
-    #   bag = LootBag()
-    #   bag.add_toy_for_child("Trent", "Google course")
-    #   bag.add_toy_for_child("Trent", "Silly putty")
-    #   bag.add_toy_for_child("Drew", "Haircut accessories")
+      bag = LootBag()
+      bag.add_toy_for_child("Trent", "Google course")
+      bag.add_toy_for_child("Trent", "Silly putty")
+      bag.add_toy_for_child("Drew", "Haircut accessories")
 
-    #   self.assertListEqual(bag.get_by_child("Trent"), ["Google course", "Silly putty"])
+      self.assertIn("Google course", bag.get_by_child("Trent"))
+      self.assertIn("Silly putty", bag.get_by_child("Trent"))
+      self.assertNotIn("Haircut accessories", bag.get_by_child("Trent"))
 
-    # def test_toys_can_be_delivered_to_child(self):
+    def test_toys_can_be_delivered_to_child(self):
 
-    #   bag = LootBag()
-    #   child = "Trent"
-    #   bag.add_toy_for_child(child, "Google course")
-    #   bag.add_toy_for_child(child, "Silly putty")
+      bag = LootBag()
+      child = "Trent"
+      bag.add_toy_for_child(child, "Google course")
+      bag.add_toy_for_child(child, "Silly putty")
 
-    #   self.assertFalse(bag.is_child_happy(child))
-    #   bag.deliver_toys_to_child(child)
-    #   self.assertTrue(bag.is_child_happy(child))
+      self.assertEqual(0, bag.is_child_happy(child))
+      bag.deliver_toys_to_child(child)
+      self.assertEqual(1, bag.is_child_happy(child))
 
 if __name__ == '__main__':
     unittest.main()
