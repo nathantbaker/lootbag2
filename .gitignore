@@ -1,0 +1,6 @@
+node_module
+bower_components
+__pycache__
+bin
+obj
+*.pyc
