@@ -47,9 +47,14 @@ class LootBag():
                 AND c.ChildId = t.ChildId
             """.format(child))
 
-            toys = c.fetchall()
-            # print(toys)
+            list_of_tuples = c.fetchall()
 
+            # format list
+            formated_list = []
+            for tuple in list_of_tuples:
+                formated_list.append(tuple[0])
+
+            return formated_list
 
     def get_list_of_kids(self):
         # desired result: return ["Ben", "Drew", "Trent"]
@@ -70,10 +75,31 @@ class LootBag():
 
 
     def is_child_happy(self, child):
-        return self.good_children[child]["delivered"]
+
+        # get the data
+        with sqlite3.connect('lootbag.db') as conn:
+            c = conn.cursor()
+
+            c.execute("SELECT Happy FROM CHILD WHERE Name='{}'".format(child))
+            list_of_tuples = c.fetchall()
+
+            # format list
+            for tuple in list_of_tuples:
+                return tuple[0]
+                break
 
     def deliver_toys_to_child(self, child):
-        self.good_children[child]["delivered"] = True
+
+        # open a connection
+        with sqlite3.connect('lootbag.db') as conn:
+            c = conn.cursor()
+
+            try:
+                c.execute("UPDATE Child SET ChildId=value, Name='{}' WHERE Happy=1".format(child))
+
+            except sqlite3.OperationalError:
+                pass
+
 
 
 
